@@ -4,7 +4,7 @@
     "description": "A powerful security and moderation plugin that acts as a firewall for user prompts. It protects your Cheshire Cat instance from spam, abuse, and malicious inputs through rate limiting, content analysis (prompt length, forbidden keywords, complexity), and a progressive suspension system.",
     "author_name": "Net7",
     "author_url": "https://www.netseven.it/",
-    "plugin_url": "https://github.com/net7/rate_limiter",
+    "plugin_url": "https://github.com/net7/rate-limiter",
     "tags": "rate limit, moderation, safety, security, guard, prompt guard, firewall",
-    "thumb": "https://raw.githubusercontent.com/net7/rate_limiter/main/logo.jpg"
+    "thumb": "https://raw.githubusercontent.com/net7/rate-limiter/main/logo.jpg"
 }
