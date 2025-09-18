@@ -1,5 +1,5 @@
 from cat.mad_hatter.decorators import plugin
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from typing import List
 
 class RateLimiterSettings(BaseModel):
@@ -50,6 +50,17 @@ class RateLimiterSettings(BaseModel):
         description="A list of case-insensitive keywords or phrases that trigger an infraction.",
         extra={"type": "TextArea"},
     )
+
+    @field_validator("jailbreak_keywords", mode="before")
+    @classmethod
+    def _coerce_keywords_into_list(cls, value):
+        if isinstance(value, str):
+            normalized = value.replace("\r", "\n").replace("\n", ",")
+            items = [item.strip() for item in normalized.split(",")]
+            return [item for item in items if item]
+        if isinstance(value, list):
+            return [str(item).strip() for item in value if str(item).strip()]
+        return value
     non_alphanumeric_threshold: float = Field(
         default=0.4,
         title="Non-Alphanumeric Character Threshold",

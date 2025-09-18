@@ -143,6 +143,10 @@ def fast_reply(fast_reply: dict, cat) -> dict | None:
     # Check 1.2: Jailbreak Keywords
     if not infraction_detected:
         keywords = settings.get("jailbreak_keywords", [])
+        # Robustness: allow legacy/comma-separated strings from settings
+        if isinstance(keywords, str):
+            normalized = keywords.replace("\r", "\n").replace("\n", ",")
+            keywords = [item.strip() for item in normalized.split(",") if item.strip()]
         if _check_jailbreak_keywords(user_prompt, keywords):
             infraction_detected = True
             is_content_infraction = True
